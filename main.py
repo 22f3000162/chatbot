@@ -58,7 +58,7 @@ st.title("Chatbot")
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
-user_input = st.chat_input("Ask something about course discussions...")
+user_input = st.chat_input("Ask something about course ...")
 
 if user_input:
     with st.spinner("Thinking..."):
@@ -78,7 +78,7 @@ if user_input:
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": '''You are a helpful and knowledgeable Teaching Assistant for the Business Analytics (BA) course in the BS Degree program at IIT Madras. Your job is to answer student queries based only on the forum discussion content provided. Use simple, clear, and professional language.
-                                                Do not make up answers or speculate. If the context doesn’t contain enough information, respond by saying that the question requires more information or encourage the student to refer to the official course materials or raise a query on the forum.
+                                                Do not make up answers or speculate.
                                                 Be concise, courteous, and focused on academic accuracy. Always cite the provided post discussions as the basis of your answers.
                                                 '''},
                 {"role": "user", "content": f"Question: {user_input}\n\nRelevant context:\n{context_block}"}
@@ -93,6 +93,6 @@ for question, answer, sources in st.session_state.chat_history:
         st.markdown(question)
     with st.chat_message("assistant"):
         st.markdown(answer)
-        st.markdown("**Sources:**")
-        for i, (_text, url, created_at) in enumerate(sources):
-            st.markdown(f"{i+1}. [View Post]({url}) — *{created_at}*")
+        # st.markdown("**Sources:**")
+        # for i, (_text, url, created_at) in enumerate(sources):
+        #     st.markdown(f"{i+1}. [View Post]({url}) — *{created_at}*")
