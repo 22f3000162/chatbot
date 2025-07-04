@@ -7,7 +7,10 @@ import os
 
 # Load .env and OpenAI client
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url="https://aipipe.org/openai/v1"
+)
 
 # Load NPZ data
 data = np.load("discourse_embeddings.npz", allow_pickle=True)
@@ -49,8 +52,8 @@ def search_similar(query, k=5):
     return top_k_indices, similarities[top_k_indices]
 
 # Streamlit Chat UI
-st.set_page_config(page_title="📚 Discourse RAG Chatbot", layout="centered")
-st.title("📚 Discourse RAG Chatbot")
+st.set_page_config(page_title="Chatbot", layout="centered")
+st.title("Chatbot")
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
